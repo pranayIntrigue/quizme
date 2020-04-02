@@ -2,6 +2,7 @@ import 'question.dart';
 
 class QuizBrain {
   int _questionCounter = 0;
+  bool _isFinished = false;
   List<Question> _questionBank = [
     //PRIVATE VARIABLE FOR ENCAPSULATION
     Question('You can lead a cow down stairs but not up stairs.', false),
@@ -38,6 +39,7 @@ class QuizBrain {
     if (_questionCounter < _questionBank.length - 1) {
       _questionCounter++;
     } else {
+      _isFinished = true;
       _questionCounter = 0; //RESET WHEN BANK IS OUT OF QUESTIONS
     }
   }
@@ -49,5 +51,9 @@ class QuizBrain {
 
   bool getAnswer() {
     return _questionBank[_questionCounter].answer;
+  }
+
+  bool isFinished() {
+    return _isFinished;
   }
 }
