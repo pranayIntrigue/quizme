@@ -1,7 +1,9 @@
 import 'question.dart';
 
 class QuizBrain {
-  List<Question> questionBank = [
+  int _questionCounter = 0;
+  List<Question> _questionBank = [
+    //PRIVATE VARIABLE FOR ENCAPSULATION
     Question('You can lead a cow down stairs but not up stairs.', false),
     Question('Approximately one quarter of human bones are in the feet.', true),
     Question('A slug\'s blood is green.', true),
@@ -31,4 +33,21 @@ class QuizBrain {
         'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         true),
   ]; //OBJECTS FOR CLASS QUESTION
+
+  void nextQuestion() {
+    if (_questionCounter < _questionBank.length - 1) {
+      _questionCounter++;
+    } else {
+      _questionCounter = 0; //RESET WHEN BANK IS OUT OF QUESTIONS
+    }
+  }
+
+  //GETTERS AND SETTERS FOR BANK
+  String getQuestion() {
+    return _questionBank[_questionCounter].question;
+  }
+
+  bool getAnswer() {
+    return _questionBank[_questionCounter].answer;
+  }
 }
