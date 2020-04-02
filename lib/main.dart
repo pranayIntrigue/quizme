@@ -59,12 +59,13 @@ class _QuizPageState extends State<QuizPage> {
             ),
             onPressed: () {
               Navigator.pop(context);
-              scoreKeeper = [];
             },
             width: 120,
           )
         ],
       ).show();
+      quizBrain.reset();
+      scoreKeeper = [];
     }
   }
 
