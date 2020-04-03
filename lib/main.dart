@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:confetti/confetti.dart';
 import 'quizbrain.dart';
 
 //IMPORT THE BANK OF QUESTIONS
@@ -31,6 +32,8 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = []; // Array definition
+  ConfettiController _controllerCenter =
+      ConfettiController(duration: const Duration(seconds: 5));
 
   void checkAnswer(bool userInput) {
     bool correctAnswer = quizBrain.getAnswer();
@@ -39,6 +42,7 @@ class _QuizPageState extends State<QuizPage> {
         Icons.check,
         color: Colors.green,
       ));
+      _controllerCenter.play();
     } else {
       scoreKeeper.add(Icon(
         Icons.close,
@@ -75,6 +79,22 @@ class _QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
+        ConfettiWidget(
+          confettiController: _controllerCenter,
+          blastDirectionality: BlastDirectionality
+              .explosive, // don't specify a direction, blast randomly
+          emissionFrequency: 0.05,
+          numberOfParticles: 10,
+          gravity: 0.7,
+          shouldLoop: false, // start again as soon as the animation is finished
+          colors: [
+            Colors.green,
+            Colors.blue,
+            Colors.pink,
+            Colors.orange,
+            Colors.purple
+          ], // manually specify the colors to be used
+        ),
         Expanded(
           flex: 5,
           child: Padding(
